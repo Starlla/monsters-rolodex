@@ -1,6 +1,7 @@
 import './App.css';
 import React, { Component } from 'react';
-import { CardList } from './components/card-list/card-list.components';
+import { CardList } from './components/card-list/card-list.component';
+import { SerachBox } from './components/serach-box/serach-box.component';
 
 
 class App extends Component {
@@ -8,6 +9,7 @@ class App extends Component {
     super();
     this.state = {
       monsters: [],
+      serachField: '',
     }
   }
 
@@ -16,9 +18,13 @@ class App extends Component {
       .then(users => this.setState({ monsters: users }));
   }
   render() {
+    const {monsters, serachField} = this.state;
+    const filteredMonsters = monsters.filter(monster=>
+      monster.name.toLowerCase().includes(serachField.toLowerCase()));
     return (
       <div className="App">
-        <CardList monsters = {this.state.monsters}></CardList>
+        <SerachBox onSearchChange={e=>this.setState({serachField: e.target.value})}/>
+        <CardList monsters = {filteredMonsters}></CardList>
       </div>
     );
   }

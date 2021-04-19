@@ -23,6 +23,7 @@ class App extends Component {
       monster.name.toLowerCase().includes(serachField.toLowerCase()));
     return (
       <div className="App">
+        <h1>Monsters Rolodex</h1>
         <SerachBox onSearchChange={e=>this.setState({serachField: e.target.value})}/>
         <CardList monsters = {filteredMonsters}></CardList>
       </div>
